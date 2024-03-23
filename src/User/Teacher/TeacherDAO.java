@@ -73,7 +73,28 @@ public class TeacherDAO {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+	
+	public static Teacher getTeacherInfo(String Id) {
+		String sql = "SELECT * FROM Teacher WHERE User_ID = ?";
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(sql)) {
 
+			statement.setInt(1, UserDAO.getUserPK(Id));
+
+			try (ResultSet resultSet = statement.executeQuery()) {
+				while (resultSet.next()) {
+					int userId = UserDAO.getUserPK(Id);
+					String name = resultSet.getString("Name");
+	                int grade = resultSet.getInt("Grade");
+	                int classNumber = resultSet.getInt("Class");
+	                return new Teacher(userId, name, grade, classNumber);				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public static void updateTeacher(String id, String name, int grade, int classNumber) {

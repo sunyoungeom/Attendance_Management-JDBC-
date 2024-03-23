@@ -43,7 +43,7 @@ public class UserDAO {
 				String type = resultSet.getString("UserType");
 				User user = new User(id, password, UserType.valueOf(type));
 				users.add(user);
-				System.out.println("ID: " + id + ", password: " + password + ", Age: " + type);
+//				System.out.println("ID: " + id + ", password: " + password + ", Age: " + type);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -80,7 +80,7 @@ public class UserDAO {
 				while (resultSet.next()) {
 					int userId = resultSet.getInt("User_ID");
 
-					System.out.println("User_ID: " + userId);
+//					System.out.println("User_ID: " + userId);
 					return userId;
 				}
 			}

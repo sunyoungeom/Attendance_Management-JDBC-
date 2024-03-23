@@ -15,6 +15,10 @@ public class StudentService {
     public List<Student> getAllStudents() {
     	return dao.getAllStudents();
     }
+    
+    public Student getStudentInfo(String Id) {
+    	return dao.getStudentInfo(Id);
+    }
 
     public void updateStudent(String id, String name, String gender, int grade, int classNumber) {
         dao.updateStudent(id, name, gender, grade, classNumber);

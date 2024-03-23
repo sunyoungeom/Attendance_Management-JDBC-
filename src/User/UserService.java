@@ -48,8 +48,8 @@ public class UserService {
         }
     }
 
-	public void getAllUsers() {
-		dao.getAllUser();
+	public List<User> getAllUsers() {
+		return dao.getAllUser();
 	}
 
 	public void getUserById(String id) {

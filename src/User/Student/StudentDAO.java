@@ -76,6 +76,32 @@ public class StudentDAO {
 		return 0;
 
 	}
+	
+	public static Student getStudentInfo(String Id) {
+	    String sql = "SELECT * FROM Student WHERE User_ID = ?";
+	    try (Connection connection = dataSource.getConnection();
+	         PreparedStatement statement = connection.prepareStatement(sql)) {
+
+	        statement.setInt(1, UserDAO.getUserPK(Id));
+
+	        try (ResultSet resultSet = statement.executeQuery()) {
+	            if (resultSet.next()) {
+	                int studentId = resultSet.getInt("Student_ID");
+	                String name = resultSet.getString("Name");
+	                String gender = resultSet.getString("Gender");
+	                int grade = resultSet.getInt("Grade");
+	                int classNumber = resultSet.getInt("Class");
+	                
+	                return new Student(studentId, name, gender, grade, classNumber);
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
+
 
 	public static void updateStudent(String id, String name, String gender, int grade, int classNumber) {
 		String sql = "UPDATE Student SET Name = ?, Gender = ?, Grade = ?, Class = ? WHERE User_ID = ?";

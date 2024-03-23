@@ -56,22 +56,23 @@ public class ClassroomDAO {
 		return classrooms;
 	}
 
-	public static int getClassroomById(String Id) {
-		String sql = "SELECT * FROM Classroom WHERE Teacher_ID = ?";
-		try (Connection conn = dataSource.getConnection(); 
-				PreparedStatement stmt = conn.prepareStatement(sql)) {
-			stmt.setInt(1, TeacherDAO.getTeacherIDById(Id));
-			try (ResultSet resultSet = stmt.executeQuery()) {
-				if (resultSet.next()) {
-					int classroomId = resultSet.getInt("Classroom_ID");
-					return classroomId;
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
+	public static int getClassroomId(int grade, int classNumber) {
+	    String sql = "SELECT Classroom_ID FROM Classroom WHERE Grade = ? AND Class = ?";
+	    try (Connection conn = dataSource.getConnection(); 
+	         PreparedStatement stmt = conn.prepareStatement(sql)) {
+	        stmt.setInt(1, grade);
+	        stmt.setInt(2, classNumber);
+	        try (ResultSet resultSet = stmt.executeQuery()) {
+	            if (resultSet.next()) {
+	                return resultSet.getInt("Classroom_ID");
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return 0;
 	}
+
 
 	public static void updateClassroom(int classroomId, int teacherId, int grade, int classNumber) {
 		String sql = "UPDATE Classroom SET Teacher_ID = ?, Grade = ?, Class = ? WHERE Classroom_ID = ?";

@@ -12,8 +12,8 @@ public class ClassroomService {
         return ClassroomDAO.getAllClassrooms();
     }
 
-    public int getClassroomIdById(String teacherId) {
-        return ClassroomDAO.getClassroomById(teacherId);
+    public int getClassroomIdById(int grade, int classNumber) {
+        return ClassroomDAO.getClassroomId(grade, classNumber);
     }
 
     public void updateClassroom(int classroomId, int teacherId, int grade, int classNumber) {
