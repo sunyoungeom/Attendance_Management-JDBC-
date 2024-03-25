@@ -19,6 +19,7 @@ public class UserService {
 	public void createUser(String id, String password, UserType type) {
         dao.createUser(id, password, type);
         
+        /* 콘솔 입력
         switch (type) {
             case TEACHER:
                 Scanner scanner1 = new Scanner(System.in);
@@ -46,6 +47,7 @@ public class UserService {
                 System.out.println("잘못된 유저 타입");
                 break;
         }
+        */
     }
 
 	public List<User> getAllUsers() {
